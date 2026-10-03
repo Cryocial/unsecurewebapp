@@ -46,7 +46,7 @@ Logins:
 
 ## Writing tests
 
-make your own file and start writing your test cases (for example, test_cases.py is a good name) and start with the normal case:
+make your own file and start writing your test cases (for example, test_cases.py is a good name) and get to bug hunting! Here's an example of a test case:
 
 ```python
 from logic import putARealFunctionHere
