@@ -19,10 +19,16 @@
 </div>
 
 <div class="card">
-  <form method="get" action="{{ url_for('checkout') }}" class="searchbar">
-    <input name="code" value="{{ code }}" placeholder="Discount code (try STUDENT10)">
-    <input name="people" value="{{ people }}" type="number" style="width:120px" title="split between N people">
-    <button type="submit">Apply</button>
+  <form method="get" action="{{ url_for('checkout') }}">
+    <label for="code" style="display:block;margin-bottom:4px">Have a discount code?</label>
+    <input id="code" name="code" value="{{ code }}"
+           style="width:100%;max-width:320px;margin-bottom:16px">
+
+    <label for="people" style="display:block;margin-bottom:4px">Split between how many people?</label>
+    <div style="display:flex;gap:8px;align-items:center">
+      <input id="people" name="people" value="{{ people }}" type="number" min="1" style="width:120px">
+      <button type="submit">Apply</button>
+    </div>
   </form>
 
   <table class="totals">
@@ -34,8 +40,12 @@
 
   {% if split %}
     <p class="muted" style="margin-top:14px">
-      Split between {{ people }}: {{ split|map('round', 2)|join(', ') }}
-      &nbsp;(sums to ${{ '%.2f'|format(split|sum) }})
+      Each of the {{ people }} people pays
+      ${{ '%.2f'|format(split[0]) }}.
+      <br>
+      ({{ people }} &times; ${{ '%.2f'|format(split[0]) }} =
+      ${{ '%.2f'|format(split|sum) }} collected toward the
+      ${{ '%.2f'|format(total) }} total)
     </p>
   {% endif %}
 

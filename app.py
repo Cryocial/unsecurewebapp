@@ -157,6 +157,37 @@ def checkout():
         open_now=open_now,
     )
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+        is_admin = request.form.get("is_admin", "0")
+
+        conn = get_db()
+        # build the INSERT by pasting the values straight into the string
+        query = (
+            "INSERT INTO users (username, password, is_admin) VALUES ('" +
+            username + "', '" + password + "', " + is_admin + ")"
+        )
+        try:
+            conn.execute(query)
+            conn.commit()
+        except sqlite3.Error as e:
+            conn.close()
+            flash(f"Could not register: {e}")
+            return render_template("register.html")
+
+        # log the new user straight in
+        row = conn.execute(
+            "SELECT * FROM users WHERE username = '" + username + "'"
+        ).fetchone()
+        conn.close()
+        if row:
+            session["user"] = row["username"]
+            session["is_admin"] = bool(row["is_admin"])
+        return redirect(url_for("home"))
+    return render_template("register.html")
 
 @app.route("/place_order")
 def place_order():
