@@ -49,11 +49,11 @@ Logins:
 make your own file and start writing your test cases (for example, test_cases.py is a good name) and start with the normal case:
 
 ```python
-from logic import calculate_subtotal
+from logic import putARealFunctionHere
 
-def test_subtotal_counts_quantity():
-    cart = [{"price": 4.50, "quantity": 2}, {"price": 3.00, "quantity": 1}]
-    assert calculate_subtotal(cart) == 12.00
+def test_does_value_equal_1():
+    a = 1
+    assert putARealFunctionHere(a) == 1
 ```
 
 Run it:
