@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="login-box card">
+  <h1>Dash<span style="color:var(--accent)">Door</span></h1>
+  <p class="muted">Sign in to start your order.</p>
+  <form method="post" action="{{ url_for('login') }}">
+    <input name="username" placeholder="username" autofocus>
+    <input name="password" type="password" placeholder="password">
+    <button type="submit">Sign in</button>
+  </form>
+  <p class="muted" style="font-size:13px;margin-top:14px">
+    Try: <code>john / intern</code>
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card">
+  <h1>Checkout</h1>
+  {% if open_now %}
+    <span class="pill open">Open now</span>
+  {% else %}
+    <span class="pill closed">Closed</span>
+  {% endif %}
+
+  <table style="margin-top:16px">
+    <tr><th>Item</th><th>Qty</th><th>Price</th></tr>
+    {% for i in cart %}
+      <tr><td>{{ i['name'] }}</td><td>{{ i['quantity'] }}</td><td>${{ '%.2f'|format(i['price']) }}</td></tr>
+    {% else %}
+      <tr><td colspan="3" class="muted">Cart is empty.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div class="card">
+  <form method="get" action="{{ url_for('checkout') }}" class="searchbar">
+    <input name="code" value="{{ code }}" placeholder="Discount code (try STUDENT10)">
+    <input name="people" value="{{ people }}" type="number" style="width:120px" title="split between N people">
+    <button type="submit">Apply</button>
+  </form>
+
+  <table class="totals">
+    <tr><td>Subtotal</td><td>${{ '%.2f'|format(subtotal) }}</td></tr>
+    {% if code %}<tr><td>After discount ({{ code }})</td><td>${{ '%.2f'|format(discounted) }}</td></tr>{% endif %}
+    <tr><td>Tax</td><td>${{ '%.4f'|format(tax) }}</td></tr>
+    <tr class="grand"><td>Total</td><td>${{ '%.4f'|format(total) }}</td></tr>
+  </table>
+
+  {% if split %}
+    <p class="muted" style="margin-top:14px">
+      Split between {{ people }}: {{ split|map('round', 2)|join(', ') }}
+      &nbsp;(sums to ${{ '%.2f'|format(split|sum) }})
+    </p>
+  {% endif %}
+
+  <p style="margin-top:14px">
+    <a href="{{ url_for('place_order') }}"><button>Place order</button></a>
+    <a href="{{ url_for('home') }}"><button class="ghost">Back to menu</button></a>
+  </p>
+</div>
+{% endblock %}

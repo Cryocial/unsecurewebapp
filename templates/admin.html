@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card">
+  <h1>Staff Dashboard</h1>
+  <p class="muted">If you can read this and you're not staff… that's the point.</p>
+</div>
+
+<div class="card">
+  <h2>Secret staff menu</h2>
+  <table>
+    <tr><th>Item</th><th>Price</th></tr>
+    {% for m in staff_menu %}
+      <tr><td>{{ m['name'] }}</td><td>${{ '%.2f'|format(m['price']) }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div class="card">
+  <h2>All orders</h2>
+  <table>
+    <tr><th>#</th><th>Customer</th><th>Order</th><th>Total</th></tr>
+    {% for o in orders %}
+      <tr><td>{{ o['id'] }}</td><td>{{ o['username'] }}</td><td>{{ o['summary'] }}</td><td>${{ '%.2f'|format(o['total']) }}</td></tr>
+    {% else %}
+      <tr><td colspan="4" class="muted">No orders yet.</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

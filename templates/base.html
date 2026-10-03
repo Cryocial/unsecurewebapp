@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DashDoor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">Dash<span>Door</span></div>
+    <div class="right">
+      {% if session.get('user') %}
+        signed in as <strong>{{ session['user'] }}</strong>
+        {% if session.get('is_admin') %}<a href="{{ url_for('admin') }}">staff</a>{% endif %}
+        <a href="{{ url_for('logout') }}">log out</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="wrap">
+    {% with msgs = get_flashed_messages() %}
+      {% for m in msgs %}<div class="flash">{{ m }}</div>{% endfor %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+  </div>
+</body>
+</html>
