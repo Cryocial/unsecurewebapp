@@ -26,7 +26,7 @@ def init_db():
     c.execute("""
         CREATE TABLE users (
             id       INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
+            username TEXT NOT NULL,
             password TEXT NOT NULL,
             is_admin INTEGER NOT NULL DEFAULT 0
         )

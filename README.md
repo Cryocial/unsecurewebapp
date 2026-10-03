@@ -40,9 +40,9 @@ Logins:
   A function is only "buggy" if it disagrees with its own docstring. This is
   where most of your tests go. Run them with `pytest`.
 
-- **`app.py`** — (extra credit) the Flask routes (login, home, checkout, admin). Two of the bug reports live here. One is about the search box. One is about carts. NOTE: this file has challenges that are less so about buggy code and more so about poor coding practice. These are MUCH harder to spot than logic.py's bugs, so i reccomend doing this last if you're feeling extra.
+- **`app.py & db.py`** — (extra credit) the Flask routes (login, home, checkout, admin). A harder challenge lies here. NOTE: this file has challenges that are less so about buggy code and more so about poor coding practice. These are MUCH harder to spot than logic.py's bugs, so i reccomend doing this last if you're feeling extra.
 
-- **`register.html`** (extra extra credit) Something's fishy about this register page... You will get a bonus prize if you're able to solve why! (access admin while not an admin) (VERY HARD) hint: the problem is not in this file
+- **`register.html`** (extra extra credit) Something's fishy about this register page... You will get a bonus prize if you're able to solve why! (access admin while not using the base admin account) (VERY HARD) hint: the problem is not in this file
 
 ## Writing tests
 
